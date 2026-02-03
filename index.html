@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dbt Commands Cheat Sheet - Complete Light</title>
+    <style>
+      :root {
+        /* LIGHT THEME PALETTE (dbt-inspired) */
+        --bg-color: #f4f6f8; /* Very subtle cool grey */
+        --card-bg: #ffffff; /* Pure white */
+        --text-main: #334155; /* Slate dark */
+        --text-desc: #64748b; /* Slate grey for descriptions */
+        --accent: #ff694b; /* dbt Orange (Primary) */
+
+        /* Code Styling */
+        --cmd-bg: #fff0ec; /* dbt Light Orange (Background) */
+        --cmd-text: #d44d34; /* dbt Dark Orange (Text) */
+        --cmd-border: #fed7cd; /* Soft Orange for borders */
+
+        --border: #e2e8f0; /* Light grey border */
+        --font-main: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: var(--font-main);
+        padding: 2.5rem;
+        line-height: 1.5;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 3px solid var(--border);
+      }
+
+      h1 {
+        font-size: 3rem;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 0.5rem;
+        font-weight: 800;
+      }
+
+      p.subtitle {
+        color: var(--text-desc);
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+
+      /* Grid Layout */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+        align-items: start; /* Prevents cards from stretching vertically to match height */
+      }
+
+      .card {
+        background-color: var(--card-bg);
+        border-radius: 12px;
+        padding: 1.8rem;
+        border: 1px solid var(--border);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+        transition: all 0.2s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+        border-color: var(--accent);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.2rem;
+        border-bottom: 2px solid var(--border);
+        padding-bottom: 0.8rem;
+      }
+
+      .cmd-title {
+        font-family: var(--font-mono);
+        font-size: 1.3rem; /* Adjusted slightly for long commands */
+        font-weight: 800;
+        color: var(--accent);
+        word-break: break-word; /* Safety for long commands on small screens */
+      }
+
+      .cmd-group {
+        margin-bottom: 1.2rem;
+      }
+
+      .cmd-group:last-child {
+        margin-bottom: 0;
+      }
+
+      .desc {
+        font-size: 0.95rem;
+        color: var(--text-desc);
+        margin-left: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>dbt Commands Cheat Sheet</h1>
+      <p class="subtitle">Complete Reference Guide</p>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header"><span class="cmd-title">dbt –empty</span></div>
+        <div class="cmd-group">
+          <div class="desc">
+            Validates the sql without putting any data through it. Also
+            validates dependencies.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="cmd-title">dbt build –select ...</span>
+        </div>
+        <div class="cmd-group">
+          <div class="desc">
+            <strong>Full command:</strong> dbt build –select <'modelname'>
+            –exclude <'modelname'> –full-refresh <br /><br />
+            Runs through the models, but also applies tests to them; also
+            includes snapshots and seeds.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="cmd-title">dbt clean</span></div>
+        <div class="cmd-group">
+          <div class="desc">
+            Deletes files/folders specified in the clean-targets.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="cmd-title">dbt clone</span></div>
+        <div class="cmd-group">
+          <div class="desc">
+            Create a duplicate of production tables without copying the data
+            into your target schema.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="cmd-title">dbt deps</span></div>
+        <div class="cmd-group">
+          <div class="desc">Validates, clones and installs packages.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="cmd-title">dbt docs generate</span>
+        </div>
+        <div class="cmd-group">
+          <div class="desc">Generates the documentation.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="cmd-title">dbt docs serve</span>
+        </div>
+        <div class="cmd-group">
+          <div class="desc">
+            Core only. Shows the documentation. Can specify port, using –port.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="cmd-title">dbt parse</span></div>
+        <div class="cmd-group">
+          <div class="desc">
+            Parses and validates the contents of your dbt project, so if there
+            are yaml or jinja syntax errors, they will be shown.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="cmd-title">dbt retry</span></div>
+        <div class="cmd-group">
+          <div class="desc">
+            Re-execute the last dbt command, but just from the point of failure.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="cmd-title">dbt run</span></div>
+        <div class="cmd-group">
+          <div class="desc">Runs through the models specified.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="cmd-title">dbt run –select ...</span>
+        </div>
+        <div class="cmd-group">
+          <div class="desc">
+            <strong>Full command:</strong> dbt run –select <'modelname'>
+            –exclude <'modelname'> <br /><br />
+            Runs just the specified model(s).
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="cmd-title">dbt run-operation</span>
+        </div>
+        <div class="cmd-group">
+          <div class="desc">
+            <strong>Full command:</strong> dbt run-operation 'macro'
+            <br /><br />
+            Runs a macro rather than running a sql script calling it.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="cmd-title">dbt seed</span></div>
+        <div class="cmd-group">
+          <div class="desc">Creates tables out of your seeds folder.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="cmd-title">dbt snapshot</span>
+        </div>
+        <div class="cmd-group">
+          <div class="desc">Runs your snapshots. Not included in dbt run.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="cmd-title">dbt source freshness</span>
+        </div>
+        <div class="cmd-group">
+          <div class="desc">Check the freshness of raw tables.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><span class="cmd-title">dbt test</span></div>
+        <div class="cmd-group">
+          <div class="desc">
+            Runs all the data tests configured against the latest
+            materialisations of your models.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="cmd-title">dbt test –select ...</span>
+        </div>
+        <div class="cmd-group">
+          <div class="desc">
+            <strong>Full command:</strong> dbt test –select <:source| modelname|
+            test_type:generic| test_type:singular> <br /><br />
+            Runs the tests configured on a specified data source, model, generic
+            tests, or singular tests.
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
